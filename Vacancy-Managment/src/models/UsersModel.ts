@@ -18,12 +18,22 @@ export class UsersModel {
     },
   ];
 
+  private static nextId: number = UsersModel.calculateNextId();
+
   constructor(attributes: UserAttributes) {
     this.id = attributes.id;
     this.name = attributes.name;
     this.email = attributes.email;
     this.password = attributes.password;
     this.role = attributes.role;
+  }
+
+  private static calculateNextId(): number {
+    const maxId = this.users.reduce(
+      (max, user) => (user.id > max ? user.id : max),
+      0
+    );
+    return maxId + 1;
   }
 
   static getUserById(id: number): UsersModel | undefined {
@@ -40,5 +50,29 @@ export class UsersModel {
     if (!user) return undefined;
 
     return user;
+  }
+
+  static userRegistration(
+    attributes: Omit<UserAttributes, "id" | "role">
+  ): UsersModel | undefined {
+    const emailInUse = this.users.find(
+      (user) => user.email === attributes.email
+    );
+
+    if (emailInUse) return undefined;
+
+    const newId = this.nextId++;
+
+    const newUser = new UsersModel({
+      id: newId,
+      name: attributes.name,
+      email: attributes.email,
+      password: bcrypt.hashSync(attributes.password, 10),
+      role: "candidate",
+    });
+
+    this.users.push(newUser);
+
+    return newUser;
   }
 }
