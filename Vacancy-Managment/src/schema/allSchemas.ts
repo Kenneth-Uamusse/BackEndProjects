@@ -17,3 +17,9 @@ export const VacancyCreationSchema = z.object({
   description: z.string(),
   limitDate: z.string(),
 });
+
+export const VacancyUpdateSchema = z.object({
+  title: z.string().optional(),
+  description: z.string().optional(),
+  limitDate: z.string().optional(),
+})

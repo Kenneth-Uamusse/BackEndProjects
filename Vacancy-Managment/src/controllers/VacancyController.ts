@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { VacancyModel } from "../models/VacancyModel";
 import { HttpError } from "../errors/HttpError";
-import { VacancyCreationSchema } from "../schema/allSchemas";
+import { VacancyCreationSchema, VacancyUpdateSchema } from "../schema/allSchemas";
 
 export class VacancyController {
   //GET /jobFlow/vacancies
@@ -33,6 +33,17 @@ export class VacancyController {
 
     res.status(201).json({ message: "Vacancy created succesfully", vacancy });
   };
+
+  //PUT /jobFlow/vacancies/update/:id
+  update = (req: Request, res: Response) => {
+    const {id} = req.params
+    const parsedBody = VacancyUpdateSchema.parse(req.body)
+
+    const updatedVacancy = VacancyModel.updateVacancy(+id, parsedBody)
+    if(!updatedVacancy) throw new HttpError(404, 'Vacancy not found')
+
+    res.json({message: 'Vacancy updated successfully', updatedVacancy})
+  }
 
   //DELETE /jobFlow/vacancies/delete/:id
   delete = (req: Request, res: Response) =>{

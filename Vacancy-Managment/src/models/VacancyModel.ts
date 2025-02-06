@@ -56,6 +56,21 @@ export class VacancyModel {
     return newVacancy;
   }
 
+  static updateVacancy(
+    id: number,
+    attributes: Partial<Omit<VacancyAttributes, "id">>
+  ): VacancyModel | undefined {
+    
+    const vacancy = this.getVacancyById(id);
+    if (!vacancy) return undefined;
+  
+    // Actualiza os atributos apenas se forem definidos
+    Object.assign(vacancy, attributes);
+  
+    return vacancy;
+  }
+  
+
   static deleteVacancy(id: number): VacancyModel | undefined {
     const vacancyIndex = this.vacancies.findIndex(
       (vacancy) => vacancy.id === id
