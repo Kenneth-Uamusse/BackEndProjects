@@ -10,6 +10,6 @@ export class AuthController {
     const newUser = UsersModel.userRegistration(user);
     if (!newUser) throw new HttpError(400, "Email already in use!!");
 
-    res.status(201).json({ newUser });
+    res.status(201).json( newUser );
   };
 }
