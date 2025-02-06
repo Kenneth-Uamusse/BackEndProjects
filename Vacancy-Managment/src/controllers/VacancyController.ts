@@ -33,4 +33,14 @@ export class VacancyController {
 
     res.status(201).json({ message: "Vacancy created succesfully", vacancy });
   };
+
+  //DELETE /jobFlow/vacancies/delete/:id
+  delete = (req: Request, res: Response) =>{
+    const {id} = req.params
+
+    const deletedVacancy = VacancyModel.deleteVacancy(+id)
+    if(!deletedVacancy) throw new HttpError(404, 'Vacancy not found')
+
+    res.json({message: 'Vacancy deleted successfully'})
+  }
 }

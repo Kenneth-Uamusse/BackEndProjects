@@ -49,10 +49,19 @@ export class VacancyModel {
     attributes: Omit<VacancyAttributes, "id">
   ): VacancyModel {
     const newId = this.nextId++;
-    const newVacancy = new VacancyModel({ ...attributes, id: newId});
+    const newVacancy = new VacancyModel({ ...attributes, id: newId });
 
     this.vacancies.push(newVacancy);
 
     return newVacancy;
+  }
+
+  static deleteVacancy(id: number): VacancyModel | undefined {
+    const vacancyIndex = this.vacancies.findIndex(
+      (vacancy) => vacancy.id === id
+    );
+    if (vacancyIndex === -1) return undefined;
+
+    return this.vacancies.splice(vacancyIndex, 1)[0];
   }
 }
