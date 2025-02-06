@@ -33,4 +33,12 @@ export class UsersModel {
 
     return user;
   }
+
+  static getUserByEmail(email: string): UsersModel | undefined {
+    const user = this.users.find((user) => user.email === email);
+
+    if (!user) return undefined;
+
+    return user;
+  }
 }
