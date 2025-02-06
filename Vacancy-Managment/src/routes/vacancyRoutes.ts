@@ -7,4 +7,6 @@ const vacancyController = new VacancyController();
 vacancyRouter.get("/vacancies", vacancyController.index);
 vacancyRouter.get('/vacancies/:id', vacancyController.show)
 
+vacancyRouter.post('/vacancies/create', vacancyController.create)
+
 export default vacancyRouter;
