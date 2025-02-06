@@ -2,12 +2,14 @@ require("dotenv").config();
 import express from "express";
 import { errorHandler } from "./middlewares/errorHandler";
 import authRouter from "./routes/authRoutes";
+import vacancyRouter from "./routes/vacancyRoutes";
 
 const app = express();
 
 app.use(express.json());
 
 app.use('/jobFlow', authRouter)
+app.use('/jobFlow', vacancyRouter)
 
 app.use(errorHandler)
 
