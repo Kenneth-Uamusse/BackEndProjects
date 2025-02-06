@@ -25,4 +25,12 @@ export class UsersModel {
     this.password = attributes.password;
     this.role = attributes.role;
   }
+
+  static getUserById(id: number): UsersModel | undefined {
+    const user = this.users.find((user) => user.id === id);
+
+    if (!user) return undefined;
+
+    return user;
+  }
 }
