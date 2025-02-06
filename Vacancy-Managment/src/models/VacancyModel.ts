@@ -16,13 +16,21 @@ export class VacancyModel {
     },
   ];
 
-  private static nextId: number = 1;
+  private static nextId: number = VacancyModel.calculateNextId();
 
   constructor(attributes: VacancyAttributes) {
     this.id = attributes.id;
     this.title = attributes.title;
     this.description = attributes.description;
     this.limitDate = attributes.limitDate;
+  }
+
+  private static calculateNextId(): number {
+    const maxId = this.vacancies.reduce(
+      (max, vacancy) => (vacancy.id > max ? vacancy.id : max),
+      0
+    );
+    return maxId + 1;
   }
 
   static getAllVacancies(): VacancyModel[] {
@@ -40,7 +48,8 @@ export class VacancyModel {
   static createVacancy(
     attributes: Omit<VacancyAttributes, "id">
   ): VacancyModel {
-    const newVacancy = new VacancyModel({ ...attributes, id: this.nextId++ });
+    const newId = this.nextId++;
+    const newVacancy = new VacancyModel({ ...attributes, id: newId});
 
     this.vacancies.push(newVacancy);
 
