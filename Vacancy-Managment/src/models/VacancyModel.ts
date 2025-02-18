@@ -5,6 +5,7 @@ export class VacancyModel {
   title: string;
   description: string;
   limitDate: string;
+  candidates: []
 
   private static vacancies: VacancyModel[] = [
     {
@@ -13,6 +14,7 @@ export class VacancyModel {
       description:
         "We are looking for a Fullstack Developer who understands react, node and express",
       limitDate: "05/03/2025",
+      candidates: []
     },
   ];
 
@@ -23,6 +25,7 @@ export class VacancyModel {
     this.title = attributes.title;
     this.description = attributes.description;
     this.limitDate = attributes.limitDate;
+    this.candidates = attributes.candidates
   }
 
   private static calculateNextId(): number {
