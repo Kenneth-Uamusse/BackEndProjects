@@ -1,11 +1,12 @@
 import VacancyAttributes from "../entities/vacancyInterface";
+import CandidacyModel from "./CandidacyModel";
 
 export class VacancyModel {
   id: number;
   title: string;
   description: string;
   limitDate: string;
-  candidates: []
+  candidates: CandidacyModel[]
 
   private static vacancies: VacancyModel[] = [
     {
