@@ -6,7 +6,7 @@ export class VacancyModel {
   title: string;
   description: string;
   limitDate: string;
-  candidates: CandidacyModel[]
+  candidates: CandidacyModel[];
 
   private static vacancies: VacancyModel[] = [
     {
@@ -15,7 +15,7 @@ export class VacancyModel {
       description:
         "We are looking for a Fullstack Developer who understands react, node and express",
       limitDate: "05/03/2025",
-      candidates: []
+      candidates: [],
     },
   ];
 
@@ -26,7 +26,7 @@ export class VacancyModel {
     this.title = attributes.title;
     this.description = attributes.description;
     this.limitDate = attributes.limitDate;
-    this.candidates = attributes.candidates
+    this.candidates = attributes.candidates;
   }
 
   private static calculateNextId(): number {
@@ -50,10 +50,14 @@ export class VacancyModel {
   }
 
   static createVacancy(
-    attributes: Omit<VacancyAttributes, "id">
+    attributes: Omit<VacancyAttributes, "id" | "candidates">
   ): VacancyModel {
     const newId = this.nextId++;
-    const newVacancy = new VacancyModel({ ...attributes, id: newId });
+    const newVacancy = new VacancyModel({
+      ...attributes,
+      id: newId,
+      candidates: [],
+    });
 
     this.vacancies.push(newVacancy);
 
@@ -64,16 +68,14 @@ export class VacancyModel {
     id: number,
     attributes: Partial<Omit<VacancyAttributes, "id">>
   ): VacancyModel | undefined {
-    
     const vacancy = this.getVacancyById(id);
     if (!vacancy) return undefined;
-  
+
     // Actualiza os atributos apenas se forem definidos
     Object.assign(vacancy, attributes);
-  
+
     return vacancy;
   }
-  
 
   static deleteVacancy(id: number): VacancyModel | undefined {
     const vacancyIndex = this.vacancies.findIndex(
