@@ -1,5 +1,5 @@
 import VacancyAttributes from "../entities/vacancyInterface";
-import CandidacyModel from "./CandidacyModel";
+import {CandidacyModel} from "./CandidacyModel";
 
 export class VacancyModel {
   id: number;

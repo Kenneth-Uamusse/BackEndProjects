@@ -5,7 +5,7 @@ import { HttpError } from "../errors/HttpError";
 import { CandidacyModel } from "../models/CandidacyModel";
 
 export class CandidacyController {
-  //POST jobFlow/applies
+  //POST jobFlow/applies/:id
   apply = (req: Request, res: Response) => {
     const { id } = req.params;
     const vacancy = VacancyModel.getVacancyById(+id);

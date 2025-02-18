@@ -1,6 +1,6 @@
 import { link } from "fs";
 import z from "zod";
-import CandidacyModel from "../models/CandidacyModel";
+import {CandidacyModel} from "../models/CandidacyModel";
 
 export const UserRegistrationSchema = z.object({
   name: z.string(),

@@ -3,6 +3,7 @@ import express from "express";
 import { errorHandler } from "./middlewares/errorHandler";
 import authRouter from "./routes/authRoutes";
 import vacancyRouter from "./routes/vacancyRoutes";
+import candidacyRouter from "./routes/candidacyRoutes";
 
 const app = express();
 
@@ -10,6 +11,7 @@ app.use(express.json());
 
 app.use('/jobFlow', authRouter)
 app.use('/jobFlow', vacancyRouter)
+app.use('/jobFlow', candidacyRouter)
 
 app.use(errorHandler)
 
