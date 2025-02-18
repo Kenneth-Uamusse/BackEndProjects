@@ -3,4 +3,5 @@ export default interface VacancyAttributes {
   title: string;
   description: string;
   limitDate: string;
+  candidates: []
 }
