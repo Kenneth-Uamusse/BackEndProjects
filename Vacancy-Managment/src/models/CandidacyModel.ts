@@ -26,8 +26,8 @@ export class CandidacyModel {
     return maxId + 1;
   }
 
-  static getAllCandiacies(): CandidacyModel[]{
-    return[...this.candidacies]
+  static getAllCandidacies(): CandidacyModel[] {
+    return [...this.candidacies];
   }
 
   static getCandidacyById(id: number): CandidacyModel | undefined {
@@ -47,6 +47,8 @@ export class CandidacyModel {
       status: "pending",
       ...attributes,
     });
+
+    this.candidacies.push(candidacy);
 
     return candidacy;
   }

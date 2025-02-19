@@ -6,14 +6,14 @@ import { CandidacyModel } from "../models/CandidacyModel";
 
 export class CandidacyController {
   //GET jobFlow/candidacies
-  index = (req: Request, res: Response) =>{
-    const candidacies = CandidacyModel.getAllCandiacies()
-    if(candidacies.length === 0){
-      res.json('No candiacies yet!!')
-    }else{
-      res.json(candidacies)
+  index = (req: Request, res: Response) => {
+    const candidacies = CandidacyModel.getAllCandidacies();
+    if (candidacies.length === 0) {
+      res.json({ message: "No candiacies yet!!" });
+    } else {
+      res.json(candidacies);
     }
-  }
+  };
 
   //GET jobFlow/candidacies/:id
   show = (req: Request, res: Response) => {
