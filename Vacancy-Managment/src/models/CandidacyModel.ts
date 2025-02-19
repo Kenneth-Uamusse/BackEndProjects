@@ -26,6 +26,10 @@ export class CandidacyModel {
     return maxId + 1;
   }
 
+  static getAllCandiacies(): CandidacyModel[]{
+    return[...this.candidacies]
+  }
+
   static getCandidacyById(id: number): CandidacyModel | undefined {
     const candidacy = this.candidacies.find((candidacy) => candidacy.id === id);
 
