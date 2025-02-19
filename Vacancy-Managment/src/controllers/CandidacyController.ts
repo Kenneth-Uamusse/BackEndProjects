@@ -5,6 +5,16 @@ import { HttpError } from "../errors/HttpError";
 import { CandidacyModel } from "../models/CandidacyModel";
 
 export class CandidacyController {
+  //GET jobFlow/candidacies/:id
+  show = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const candidacy = CandidacyModel.getCandidacyById(+id);
+
+    if (!candidacy) throw new HttpError(404, "Candidacy not found!!");
+
+    res.status(200).json(candidacy);
+  };
+  
   //POST jobFlow/applies/:id
   apply = (req: Request, res: Response) => {
     const { id } = req.params;
