@@ -41,6 +41,7 @@ export class CandidacyController {
     res.status(201).json({ candidacy });
   };
 
+  //POST jobFlow/candidacies/changeStatus/:id
   change = (req: Request, res: Response) => {
     const { id } = req.params;
     const { status } = req.body;
