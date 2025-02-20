@@ -6,7 +6,10 @@ const vacancyRouter = express.Router();
 const vacancyController = new VacancyController();
 const authMiddleware = new AuthMiddleware();
 
-vacancyRouter.use(authMiddleware.ensureUserIsAuth);
+vacancyRouter.use(
+  authMiddleware.ensureUserIsAuth,
+  authMiddleware.ensureUserIsAdmin
+);
 
 vacancyRouter.get("/vacancies", vacancyController.index);
 vacancyRouter.get("/vacancies/:id", vacancyController.show);

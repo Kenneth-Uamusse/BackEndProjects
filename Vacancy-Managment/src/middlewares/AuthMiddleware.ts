@@ -26,4 +26,12 @@ export class AuthMiddleware {
       throw new HttpError(401, "Invalid token!!");
     }
   };
+
+  ensureUserIsAdmin = (req: Request, res: Response, next: NextFunction) => {
+    if (req.authenticatedUser?.role === "recruiter") {
+      next();
+    } else {
+      next(new HttpError(403, "Permission denied"));
+    }
+  };
 }
