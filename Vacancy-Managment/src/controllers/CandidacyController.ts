@@ -9,7 +9,7 @@ export class CandidacyController {
   index = (req: Request, res: Response) => {
     const candidacies = CandidacyModel.getAllCandidacies();
     if (candidacies.length === 0) {
-      res.json({ message: "No candiacies yet!!" });
+      res.json({ message: "No candidacies yet!!" });
     } else {
       res.json(candidacies);
     }
@@ -39,5 +39,17 @@ export class CandidacyController {
     vacancy.candidates.push(candidacy);
 
     res.status(201).json({ candidacy });
+  };
+
+  change = (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status } = req.body;
+    const candidacy = CandidacyModel.getCandidacyById(+id);
+
+    if (!candidacy) throw new HttpError(404, "Candidacy not found!!");
+
+    const updatedCandidacy = CandidacyModel.changeStatus(+id, status);
+
+    res.json({ updatedCandidacy });
   };
 }

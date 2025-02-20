@@ -52,4 +52,16 @@ export class CandidacyModel {
 
     return candidacy;
   }
+
+  static changeStatus(
+    id: number,
+    status: "approved" | "rejected"
+  ): CandidacyModel | undefined {
+    const candidacy = this.getCandidacyById(id);
+    if (!candidacy) return undefined;
+
+    candidacy.status = status;
+
+    return candidacy;
+  }
 }
