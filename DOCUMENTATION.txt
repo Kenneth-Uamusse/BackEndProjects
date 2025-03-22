@@ -1,0 +1,27 @@
+if (status) where.campaigns = { some: { status } }
+=> Inclui uma condição que verifica se há alguma campanha associada ao lead (some) que tenha o mesmo status especificado.
+ 
+Explicação detalhada:
+where.campaigns: Refere-se ao relacionamento entre leads e campanhas. No Prisma, isso indica que estamos filtrando com base nas campanhas associadas ao lead.
+
+some: É um operador do Prisma que verifica se pelo menos uma das campanhas associadas ao lead atende à condição especificada.
+
+{ status }: Define a condição que será aplicada. Aqui, está verificando se o status da campanha é igual ao valor do parâmetro status.
+
+
+const where: Prisma.LeadWhereInput = {
+   campaigns: { some: { campaignId } },
+};
+=> Ele retorna leads que pertencem a alguma campanha com o campaignId que foi passado.
+
+const updatedGroup = await prisma.group.update({
+    data: { leads: { connect: { id: body.leadId } } }, // fazer com que o lead(leadId) se conecte ao grupo
+    where: {
+      id: +req.params.groupId,
+    },
+})
+
+
+Prisma.LeadWhereInput é um tipo para criar filtros ao buscar registros no banco.
+Ele permite definir condições simples e avançadas (comparações, texto, datas, relacionamentos).
+É útil para consultas dinâmicas e reutilizáveis.
